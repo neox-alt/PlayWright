@@ -46,7 +46,7 @@ test('MyFirstTestCase',async ({browser})=>{
     console.log(allTitles);
     });
 
-test.only('MySecondTestCase',async ({browser})=>{
+test('MySecondTestCase',async ({browser})=>{
     const context = await browser.newContext();
     const page = await context.newPage();
 
