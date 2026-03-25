@@ -6,11 +6,8 @@ const playwright = require('@playwright/test');
 
 
 Given('a login to Ecommerce application {string} and {string}', {timeout: 100*1000},async function (username, password) {
-            const browser = await playwright.chromium.launch({headless : false} );  
-            const context = await browser.newContext();
-           const page = await context.newPage();     
-           this.poManager = new POManager(page);
-           const products = page.locator(".card-body");
+
+           const products = this.page.locator(".card-body");
            const loginPage = this.poManager.getLoginPage();
            await loginPage.goTo();
            await loginPage.validLogin(username,password);
@@ -48,4 +45,20 @@ Given('a login to Ecommerce application {string} and {string}', {timeout: 100*10
             await this.ordersHistoryPage.searchOrderAndSelect(this.orderId);
             expect(this.orderId.includes(await this.ordersHistoryPage.getOrderId())).toBeTruthy();
            
+         });
+
+        Given('a login to Ecommerce application with {string} and {string}',{timeout: 100*1000}, async function (username, password) {
+           // Write code here that turns the phrase above into concrete actions
+            await this.page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+            const userName = this.page.locator('#username');
+            await userName.fill(username);
+            await this.page.locator("[type='password']").fill(password);
+            await this.page.locator('#signInBtn').click();
+
+         });
+
+
+        Then('Verify error message is displayed',{timeout: 100*1000}, async function () { 
+            await expect(this.page .locator("[style*='block']")).toContainText('Incorrect');
+        
          });

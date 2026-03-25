@@ -1,6 +1,6 @@
 Feature: Ecommerce Validations 
 
-
+    @Validation
     Scenario: placing the order
         Given a login to Ecommerce application "anshika@gmail.com" and "Iamking@000"
         When Add "ZARA COAT 3" to cart
