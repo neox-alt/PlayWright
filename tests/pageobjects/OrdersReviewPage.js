@@ -10,7 +10,7 @@ this.dropdown = page.locator(".ta-results");
 this.emailId = page.locator(".user__name [type='text']").first();
 this.submit =  page.locator(".action__submit");
 this.orderConfirmationText = page.locator(".hero-primary");
-this.orderId = page.locator(".em-spacer-1 .ng-star-inserted");
+this.orderId = page.locator(".ng-star-inserted").first();
 
 }
 async searchCountryAndSelect(countryCode,countryName)
@@ -40,6 +40,7 @@ async SubmitAndGetOrderId()
 {
  await this.submit.click();
  await expect(this.orderConfirmationText).toHaveText(" Thankyou for the order. ");
+ this.page.pause();
  return await this.orderId.textContent();
 }
 }
